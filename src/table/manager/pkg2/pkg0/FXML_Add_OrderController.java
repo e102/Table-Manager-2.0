@@ -53,9 +53,9 @@ public class FXML_Add_OrderController implements Initializable {
     
     ArrayList menu = new ArrayList();
     
-    Order this_order;
+    Order this_order = new Order();
 
-    
+    ObservableList<Menu_Item> observable_contents;
     /**
      * Initializes the controller class.
      */
@@ -69,10 +69,14 @@ public class FXML_Add_OrderController implements Initializable {
         menu.add(cheesecake);
         ObservableList<Menu_Item> observable_menu = FXCollections.observableArrayList(menu);
         combobox_menuItems.setItems(observable_menu);
+        
+        lbl_table_num.setText(Integer.toString(table_number));
+
     }
     
     @FXML
     public void addItem(ActionEvent e){
+        this_order.addItem(cheesecake); //PROBLEM
         this_order.addItem(combobox_menuItems.getValue());
     }
     
@@ -92,18 +96,10 @@ public class FXML_Add_OrderController implements Initializable {
     }
     
     public void initialize_order(){
-        System.out.println(owner.getName());
-        System.out.println(table_number);
-//        this_order = new Order(owner, table_number);
-//        ObservableList<Menu_Item> observable_contents = FXCollections.observableArrayList(this_order.get_contents());
-//        lstview_order_contents.setItems(observable_contents);
+        this_order.setOwner(owner);
+        this_order.setTable(table_number);
+        observable_contents = FXCollections.observableArrayList(this_order.get_contents());
+        lstview_order_contents.setItems(observable_contents);
     }
-//    public void set_order(Order order){
-//        this_order = order;
-//        
-//        //Setting up listview of items currently in order
-//        ObservableList<Menu_Item> observable_contents = FXCollections.observableArrayList(this_order.get_contents());
-//        lstview_order_contents.setItems(observable_contents);
-//    }
     
 }

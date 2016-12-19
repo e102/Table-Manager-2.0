@@ -56,4 +56,20 @@ public class Order {
     public ArrayList<Menu_Item> get_contents(){
         return this.contents;
     }
+    
+    public User getOwner(){
+        return this.owner;
+    }
+    
+    public void setOwner(User owner){
+        this.owner = owner;
+    }
+    
+    public void setTable(int table){
+        this.table = table;
+    }
+    
+    public void setComment(String comment){
+        this.comment = comment;
+    }
 }

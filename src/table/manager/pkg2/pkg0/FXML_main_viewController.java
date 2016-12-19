@@ -139,9 +139,10 @@ public class FXML_main_viewController implements Initializable {
         Scene scene = new Scene(order_chooser_loader.load());
         FXML_Add_OrderController ctrl = order_chooser_loader.getController();
         modify_order.setScene(scene);
-        modify_order.show();
         ctrl.set_owner(user);
         ctrl.set_table(selected_table);
+        ctrl.initialize_order();
+        modify_order.show();
 //        ctrl.set_order(table_to_order(selected_table));   //Not neccessary. Orders are public
         }
         catch(Exception e){
