@@ -45,12 +45,18 @@ public class FXML_main_viewController implements Initializable {
     private ImageView img_table3;
     @FXML
     private Label welcome_user_lbl;
-    
+    @FXML
+    private Label lbl_total;
+    @FXML
+    private Button btn_add_order1;
     
     User user;
     int selected_table = 0; //0 = no table selected
-    ArrayList<Order> current_orders = new ArrayList();
+    Order table_1_order = null;
+    Order table_2_order = null;
+    Order table_3_order = null;
     ArrayList<Order> old_orders = new ArrayList();
+
     
     /**
      * Initializes the controller class.
@@ -91,5 +97,60 @@ public class FXML_main_viewController implements Initializable {
     private void table_pressed(int table_number){
         selected_table = table_number;
         lbl_selected_table.setText(Integer.toString(table_number));
+    }
+    
+    @FXML
+    private void add_order(ActionEvent a){
+        
+        // no table selecte = try again
+        if(selected_table == 0){
+            return;
+        }
+        
+        System.out.println("Order something already!");
+    }
+    
+    @FXML
+    private void cancel_order(ActionEvent a){
+        
+        // no table selecte = try again
+        if(selected_table == 0){
+            return;
+        }
+        
+        // table selected = delete current order
+        if(selected_table == 1){
+            table_1_order = null;
+        }
+        if(selected_table == 2){
+            table_2_order = null;
+        }       
+        if(selected_table == 3){
+            table_3_order = null;
+        }
+        
+        System.out.println("Order deleted!");
+    }
+    
+    @FXML 
+    private void close_order(ActionEvent a){
+        // no table selecte = try again
+        if(selected_table == 0){
+            return;
+        }
+        
+        // table selected = delete current order        
+        if(selected_table == 1){
+            old_orders.add(table_1_order);
+            table_1_order = null;
+        }
+        if(selected_table == 2){
+            old_orders.add(table_2_order);
+            table_2_order = null;
+        }       
+        if(selected_table == 3){
+            old_orders.add(table_3_order);
+            table_3_order = null;
+        }
     }
 }
