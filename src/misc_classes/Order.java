@@ -24,19 +24,20 @@ public class Order {
     
     public void addItem(Menu_Items item){
         contents.add(item);
-        findTotalPrice();
+        totalPrice += findTotalPrice();
     }
     
     public void removeItem(Menu_Items item){
         contents.remove(item);
-        findTotalPrice();
+        totalPrice -= findTotalPrice();
     }
     
 
-    private void findTotalPrice(){
-        totalPrice = 0;
+    private float findTotalPrice(){
+        int total = 0;
         for (int i = 0; i < contents.size(); i++) {
-            totalPrice += contents.get(i).getCost();
+            total += contents.get(i).getCost();
         }
+        return total;
     }
 }
