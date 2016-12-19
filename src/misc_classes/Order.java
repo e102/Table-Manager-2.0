@@ -22,6 +22,10 @@ public class Order {
         this.owner = owner;
         this.table = table;
     }
+    
+    public Order(){
+    }
+    
     @Override
     public String toString(){
         return owner.getName();
@@ -49,7 +53,7 @@ public class Order {
         return this.totalPrice;
     }
     
-    private ArrayList<Menu_Item> get_contents(){
+    public ArrayList<Menu_Item> get_contents(){
         return this.contents;
     }
 }

@@ -19,12 +19,13 @@
                   <Label layoutX="14.0" layoutY="54.0" prefHeight="17.0" prefWidth="87.0" text="Selected Table:" />
                   <Label fx:id="lbl_selected_table" layoutX="130.0" layoutY="54.0" text="None" />
                   <Button fx:id="btn_add_order" layoutX="39.0" layoutY="81.0" mnemonicParsing="false" onAction="#add_order" text="Add Order" />
-                  <ListView fx:id="list_orders" layoutX="14.0" layoutY="123.0" prefHeight="355.0" prefWidth="263.0" />
+                  <ListView fx:id="list_orders" layoutX="21.0" layoutY="159.0" prefHeight="355.0" prefWidth="263.0" />
                   <Label layoutX="14.0" layoutY="537.0" text="Total = " />
                   <Label fx:id="lbl_total" layoutX="130.0" layoutY="537.0" text="N/A" />
                   <Button fx:id="btn_cancel_order" layoutX="166.0" layoutY="703.0" mnemonicParsing="false" onAction="#cancel_order" text="Cancel Order" />
                   <Label fx:id="welcome_user_lbl" layoutX="14.0" layoutY="23.0" prefHeight="17.0" prefWidth="263.0" text="User" />
                   <Button fx:id="btn_add_order1" layoutX="165.0" layoutY="81.0" mnemonicParsing="false" text="Modify Order" />
+                  <Label fx:id="Order_Erro_Label" layoutX="21.0" layoutY="126.0" textFill="RED" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>

@@ -52,13 +52,16 @@ public class FXML_main_viewController implements Initializable {
     private Label lbl_total;
     @FXML
     private Button btn_add_order1;
+    @FXML
+    private Label Order_Erro_Label;
     
     private User user;
     private int selected_table = 0; //0 = no table selected
-    private Order table_1_order = null;
-    private Order table_2_order = null;
-    private Order table_3_order = null;
+    protected Order table_1_order = null;
+    protected Order table_2_order = null;
+    protected Order table_3_order = null;
     private ArrayList<Order> old_orders = new ArrayList();
+
     
 
     
@@ -108,12 +111,23 @@ public class FXML_main_viewController implements Initializable {
         
         //check if an order already exists
         if(table_to_order(selected_table) != null){
+            Order_Erro_Label.setText("Open order already exists.");
             return;
         }
         
         // check if a table is selected
         if(selected_table == 0){
+            Order_Erro_Label.setText("Please select a table");
             return;
+        }
+        if(selected_table == 1){
+            table_1_order = new Order(user,selected_table);
+        }
+        if(selected_table == 2){
+            table_2_order = new Order(user,selected_table);
+        }
+        if(selected_table == 3){
+            table_3_order = new Order(user,selected_table);
         }
         
         //Open order modifier page
@@ -128,7 +142,7 @@ public class FXML_main_viewController implements Initializable {
         modify_order.show();
         ctrl.set_owner(user);
         ctrl.set_table(selected_table);
-        ctrl.set_order(table_to_order(selected_table));
+//        ctrl.set_order(table_to_order(selected_table));   //Not neccessary. Orders are public
         }
         catch(Exception e){
             e.printStackTrace();
@@ -138,8 +152,15 @@ public class FXML_main_viewController implements Initializable {
     @FXML
     private void cancel_order(ActionEvent a){
         
-        // no table selecte = try again
+        // no table selected = try again
         if(selected_table == 0){
+            Order_Erro_Label.setText("Please select a table");
+            return;
+        }
+        
+        //no order = can't delete
+        if(table_to_order(selected_table) == null){
+            Order_Erro_Label.setText("There is no order to delete.");
             return;
         }
         
@@ -179,7 +200,7 @@ public class FXML_main_viewController implements Initializable {
         }
     }
     
-    private Order table_to_order(int i){
+    public Order table_to_order(int i){
         if(i == 1){
             return table_1_order;
         }

@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import misc_classes.Menu_Item;
@@ -29,7 +30,7 @@ import misc_classes.User;
 public class FXML_Add_OrderController implements Initializable {
 
     @FXML
-    private ListView<?> lstview_order_contents;
+    private ListView<Menu_Item> lstview_order_contents;
     @FXML
     private ComboBox<Menu_Item> combobox_menuItems;
     @FXML
@@ -39,7 +40,7 @@ public class FXML_Add_OrderController implements Initializable {
     @FXML
     private Button bttn_remove_item;
     @FXML
-    private ComboBox<Integer> combobox_table;
+    private Label lbl_table_num;
     
     User owner;
     int table_number;
@@ -51,8 +52,6 @@ public class FXML_Add_OrderController implements Initializable {
     Menu_Item cheesecake = new Menu_Item("Cheesecake", 5);
     
     ArrayList menu = new ArrayList();
-    
-    ArrayList tables = new ArrayList();
     
     Order this_order;
 
@@ -70,21 +69,14 @@ public class FXML_Add_OrderController implements Initializable {
         menu.add(cheesecake);
         ObservableList<Menu_Item> observable_menu = FXCollections.observableArrayList(menu);
         combobox_menuItems.setItems(observable_menu);
-        
-        //setting up table comboBox
-        Integer a = new Integer(1);
-        Integer b = new Integer(2);
-        Integer c = new Integer(3);
-        tables.add(a);
-        tables.add(b);
-        tables.add(c);
-        combobox_table.setItems(FXCollections.observableArrayList(tables));
     }
     
+    @FXML
     public void addItem(ActionEvent e){
         this_order.addItem(combobox_menuItems.getValue());
     }
     
+    @FXML
     public void deleteItem(ActionEvent e){
         this_order.removeItem(combobox_menuItems.getValue());
     }
@@ -94,9 +86,24 @@ public class FXML_Add_OrderController implements Initializable {
     }
     public void set_table(int table_number){
         this.table_number = table_number;
+        
+//      Setting up table number lbl
+        lbl_table_num.setText(Integer.toString(table_number));
     }
-    public void set_order(Order order){
-        this_order = order;
+    
+    public void initialize_order(){
+        System.out.println(owner.getName());
+        System.out.println(table_number);
+//        this_order = new Order(owner, table_number);
+//        ObservableList<Menu_Item> observable_contents = FXCollections.observableArrayList(this_order.get_contents());
+//        lstview_order_contents.setItems(observable_contents);
     }
+//    public void set_order(Order order){
+//        this_order = order;
+//        
+//        //Setting up listview of items currently in order
+//        ObservableList<Menu_Item> observable_contents = FXCollections.observableArrayList(this_order.get_contents());
+//        lstview_order_contents.setItems(observable_contents);
+//    }
     
 }
