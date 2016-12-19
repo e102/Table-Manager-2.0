@@ -20,6 +20,11 @@ public class Menu_Item {
         this.cost = cost;
     }
     
+    @Override
+    public String toString(){
+        return this.name;
+    }
+    
     public String getName(){
         return this.name;
     }

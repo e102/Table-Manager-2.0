@@ -7,16 +7,17 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60" fx:controller="table.manager.pkg2.pkg0.FXML_Add_OrderController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="table.manager.pkg2.pkg0.FXML_Add_OrderController">
    <children>
       <ListView fx:id="lstview_order_contents" layoutX="364.0" layoutY="21.0" prefHeight="343.0" prefWidth="200.0" />
       <ComboBox fx:id="combobox_menuItems" layoutX="25.0" layoutY="47.0" prefWidth="150.0" />
       <Button layoutX="25.0" layoutY="352.0" mnemonicParsing="false" text="Add Order" />
-      <Button fx:id="bttn_add_item" layoutX="216.0" layoutY="47.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="bttn_add_item" layoutX="216.0" layoutY="47.0" mnemonicParsing="false" onAction="#addItem" text="Add" />
       <TextArea fx:id="txtarea_comments" layoutX="25.0" layoutY="131.0" prefHeight="69.0" prefWidth="150.0" />
-      <Label layoutX="25.0" layoutY="21.0" text="Add Items" />
+      <Label layoutX="25.0" layoutY="21.0" text="Items" />
       <Label layoutX="25.0" layoutY="106.0" text="Comments" />
-      <Button fx:id="bttn_remove_item" layoutX="281.0" layoutY="47.0" mnemonicParsing="false" text="Remove" />
+      <Button fx:id="bttn_remove_item" layoutX="281.0" layoutY="47.0" mnemonicParsing="false" onAction="#deleteItem" text="Remove" />
+      <Label layoutX="25.0" layoutY="220.0" text="Table" />
+      <ComboBox fx:id="combobox_table" layoutX="22.0" layoutY="250.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

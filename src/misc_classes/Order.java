@@ -22,6 +22,10 @@ public class Order {
         this.owner = owner;
         this.table = table;
     }
+    @Override
+    public String toString(){
+        return owner.getName();
+    }
     
     public void addItem(Menu_Item item){
         contents.add(item);

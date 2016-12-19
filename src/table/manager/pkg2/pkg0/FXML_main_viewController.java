@@ -53,14 +53,13 @@ public class FXML_main_viewController implements Initializable {
     @FXML
     private Button btn_add_order1;
     
-    User user;
-    int selected_table = 0; //0 = no table selected
-    Order table_1_order = null;
-    Order table_2_order = null;
-    Order table_3_order = null;
-    ArrayList<Order> old_orders = new ArrayList();
+    private User user;
+    private int selected_table = 0; //0 = no table selected
+    private Order table_1_order = null;
+    private Order table_2_order = null;
+    private Order table_3_order = null;
+    private ArrayList<Order> old_orders = new ArrayList();
     
-    public final static Order currentOrder = null;
 
     
     /**
@@ -107,10 +106,17 @@ public class FXML_main_viewController implements Initializable {
     @FXML
     private void add_order(ActionEvent a){
         
-        // no table selecte = try again
+        //check if an order already exists
+        if(table_to_order(selected_table) != null){
+            return;
+        }
+        
+        // check if a table is selected
         if(selected_table == 0){
             return;
         }
+        
+        //Open order modifier page
         Stage modify_order = new Stage();
         modify_order.setAlwaysOnTop(true);
         modify_order.setTitle("Order Creator");
@@ -122,6 +128,7 @@ public class FXML_main_viewController implements Initializable {
         modify_order.show();
         ctrl.set_owner(user);
         ctrl.set_table(selected_table);
+        ctrl.set_order(table_to_order(selected_table));
         }
         catch(Exception e){
             e.printStackTrace();
@@ -170,5 +177,18 @@ public class FXML_main_viewController implements Initializable {
             old_orders.add(table_3_order);
             table_3_order = null;
         }
+    }
+    
+    private Order table_to_order(int i){
+        if(i == 1){
+            return table_1_order;
+        }
+        if(i == 2){
+            return table_2_order;
+        }       
+        if(i == 3){
+            return table_3_order;
+        }
+        return null;
     }
 }
