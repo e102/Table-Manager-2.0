@@ -33,7 +33,7 @@
                   <Insets left="100.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="help_button" mnemonicParsing="false" text="Help" GridPane.columnIndex="3" GridPane.rowIndex="5">
+            <Button fx:id="admin_button" mnemonicParsing="false" text="Admin Portal" GridPane.columnIndex="3" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="100.0" />
                </GridPane.margin>

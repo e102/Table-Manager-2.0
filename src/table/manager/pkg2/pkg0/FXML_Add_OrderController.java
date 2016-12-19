@@ -70,20 +70,21 @@ public class FXML_Add_OrderController implements Initializable {
         menu.add(cheesecake);
         ObservableList<Menu_Item> observable_menu = FXCollections.observableArrayList(menu);
         combobox_menuItems.setItems(observable_menu);
+        combobox_menuItems.getSelectionModel().selectFirst();
         
+        //Set up table number label
         lbl_table_num.setText(Integer.toString(table_number));
 
     }
     
     @FXML
     public void addItem(ActionEvent e){
-        this_order.addItem(coffee);
-        this_order.addItem(combobox_menuItems.getValue());
+        observable_contents.add(combobox_menuItems.getValue());
     }
     
     @FXML
     public void deleteItem(ActionEvent e){
-        this_order.removeItem(combobox_menuItems.getValue());
+        observable_contents.remove(combobox_menuItems.getValue());
     }
     
     public void set_owner(User owner){

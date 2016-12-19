@@ -33,7 +33,7 @@ public class FXML_LoginController implements Initializable {
     @FXML
     private Button login_button;
     @FXML
-    private Button help_button;
+    private Button admin_button;
     @FXML
     private Label username_label;
     @FXML
