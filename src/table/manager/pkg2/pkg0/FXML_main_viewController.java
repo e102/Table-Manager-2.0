@@ -11,7 +11,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -19,6 +21,7 @@ import javafx.scene.image.ImageView;
 import misc_classes.Order;
 import misc_classes.User;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -56,6 +59,8 @@ public class FXML_main_viewController implements Initializable {
     Order table_2_order = null;
     Order table_3_order = null;
     ArrayList<Order> old_orders = new ArrayList();
+    
+    public final static Order currentOrder = null;
 
     
     /**
@@ -106,8 +111,21 @@ public class FXML_main_viewController implements Initializable {
         if(selected_table == 0){
             return;
         }
-        
-        System.out.println("Order something already!");
+        Stage modify_order = new Stage();
+        modify_order.setAlwaysOnTop(true);
+        modify_order.setTitle("Order Creator");
+        FXMLLoader order_chooser_loader = new FXMLLoader(getClass().getResource("FXML_Add_Order.fxml"));
+        try{
+        Scene scene = new Scene(order_chooser_loader.load());
+        FXML_Add_OrderController ctrl = order_chooser_loader.getController();
+        modify_order.setScene(scene);
+        modify_order.show();
+        ctrl.set_owner(user);
+        ctrl.set_table(selected_table);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     @FXML

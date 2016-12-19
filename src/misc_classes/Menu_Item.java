@@ -11,11 +11,11 @@ package misc_classes;
  */
 
 //i.e: pasta, etc...
-public class Menu_Items {
+public class Menu_Item {
     private String name;
     private float cost;
     
-    public Menu_Items(String name, float cost){
+    public Menu_Item(String name, float cost){
         this.name = name;
         this.cost = cost;
     }

@@ -22,12 +22,14 @@ public class TableManager20 extends Application {
     
     private User admin1 = new User("Gita", "best_coursework_ever", true);
     private User waiter1 = new User("Walter", "just_a_waiter", false);
+    private User test = new User("test","test",true);
     private HashMap <String,User> userData = new HashMap();
     
     @Override
     public void start(Stage stage) throws Exception {
         userData.put(admin1.getName(), admin1);
         userData.put(waiter1.getName(), waiter1);
+        userData.put(test.getName(), test);
         stage.setTitle("Table Manager 2.0 Login");
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("FXML_Login.fxml"));
         Scene scene = new Scene(loginLoader.load());

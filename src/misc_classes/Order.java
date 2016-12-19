@@ -15,29 +15,37 @@ public class Order {
     private User owner;
     private int table;
     private float totalPrice = 0;
-    private ArrayList<Menu_Items> contents = new ArrayList();
+    private ArrayList<Menu_Item> contents = new ArrayList();
+    private String comment = "";
     
     public Order(User owner, int table){
         this.owner = owner;
         this.table = table;
     }
     
-    public void addItem(Menu_Items item){
+    public void addItem(Menu_Item item){
         contents.add(item);
         totalPrice += findTotalPrice();
     }
     
-    public void removeItem(Menu_Items item){
+    public void removeItem(Menu_Item item){
         contents.remove(item);
         totalPrice -= findTotalPrice();
     }
     
-
     private float findTotalPrice(){
         int total = 0;
         for (int i = 0; i < contents.size(); i++) {
             total += contents.get(i).getCost();
         }
         return total;
+    }
+    
+    private float getPrice(){
+        return this.totalPrice;
+    }
+    
+    private ArrayList<Menu_Item> get_contents(){
+        return this.contents;
     }
 }
