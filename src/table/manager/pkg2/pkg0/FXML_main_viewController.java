@@ -8,6 +8,8 @@ package table.manager.pkg2.pkg0;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,6 +22,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import misc_classes.Order;
 import misc_classes.User;
+import misc_classes.Menu_Item;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -37,7 +40,7 @@ public class FXML_main_viewController implements Initializable {
     @FXML
     private Button btn_add_order;
     @FXML
-    private ListView<?> list_orders;
+    private ListView<Menu_Item> list_orders;
     @FXML
     private Button btn_cancel_order;
     @FXML
@@ -54,6 +57,8 @@ public class FXML_main_viewController implements Initializable {
     private Button btn_add_order1;
     @FXML
     private Label Order_Erro_Label;
+    @FXML
+    private Button btn_refresh;
     
     private User user;
     private int selected_table = 0; //0 = no table selected
@@ -64,6 +69,8 @@ public class FXML_main_viewController implements Initializable {
 
     
 
+    ObservableList<Menu_Item> observable_order_contents;
+    ObservableList<Menu_Item> observable_empty = FXCollections.emptyObservableList();
     
     /**
      * Initializes the controller class.
@@ -104,8 +111,17 @@ public class FXML_main_viewController implements Initializable {
     private void table_pressed(int table_number){
         selected_table = table_number;
         lbl_selected_table.setText(Integer.toString(table_number));
+        if(table_to_order(table_number) != null){
+            observable_order_contents = FXCollections.observableList(table_to_order(table_number).get_contents());
+            list_orders.setItems(observable_order_contents);
+        }
+        else{
+            observable_order_contents = null;
+            list_orders.setItems(observable_empty);
+        }
     }
     
+    //Opens the order adder window. The user can then create a new order.
     @FXML
     private void add_order(ActionEvent a){
         
@@ -120,15 +136,11 @@ public class FXML_main_viewController implements Initializable {
             Order_Erro_Label.setText("Please select a table");
             return;
         }
-        if(selected_table == 1){
-            table_1_order = new Order(user,selected_table);
-        }
-        if(selected_table == 2){
-            table_2_order = new Order(user,selected_table);
-        }
-        if(selected_table == 3){
-            table_3_order = new Order(user,selected_table);
-        }
+        
+        //Create new order for the seleted table
+        if(selected_table == 1){table_1_order = new Order(user,selected_table);}
+        if(selected_table == 2){table_2_order = new Order(user,selected_table);}
+        if(selected_table == 3){table_3_order = new Order(user,selected_table);}
         
         //Open order modifier page
         Stage modify_order = new Stage();
@@ -143,7 +155,6 @@ public class FXML_main_viewController implements Initializable {
         ctrl.set_table(selected_table);
         ctrl.initialize_order();
         modify_order.show();
-//        ctrl.set_order(table_to_order(selected_table));   //Not neccessary. Orders are public
         }
         catch(Exception e){
             e.printStackTrace();
@@ -161,7 +172,7 @@ public class FXML_main_viewController implements Initializable {
         
         //no order = can't delete
         if(table_to_order(selected_table) == null){
-            Order_Erro_Label.setText("There is no order to delete.");
+            Order_Erro_Label.setText("There is no open order to delete.");
             return;
         }
         
@@ -201,6 +212,17 @@ public class FXML_main_viewController implements Initializable {
         }
     }
     
+    @FXML   //WIP
+    private void refresh_list(ActionEvent z){
+        if(selected_table == 0){return;}
+        if(table_to_order(selected_table) == null){return;}
+        observable_order_contents = FXCollections.observableList(table_to_order(selected_table).get_contents());
+        list_orders.setItems(observable_order_contents);
+    }
+    
+    
+    
+    //Misc method which returns order of a table when given table number.
     public static Order table_to_order(int i){
         if(i == 1){
             return table_1_order;
