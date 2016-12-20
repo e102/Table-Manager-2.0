@@ -60,6 +60,10 @@ public class Order {
         return this.owner;
     }
     
+    public String getComment(){
+        return comment;
+    }
+    
     public void setOwner(User owner){
         this.owner = owner;
     }

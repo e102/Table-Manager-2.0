@@ -201,7 +201,7 @@ public class FXML_main_viewController implements Initializable {
         }
     }
     
-    public Order table_to_order(int i){
+    public static Order table_to_order(int i){
         if(i == 1){
             return table_1_order;
         }

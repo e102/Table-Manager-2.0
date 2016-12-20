@@ -18,6 +18,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 import misc_classes.Menu_Item;
 import misc_classes.Order;
 import misc_classes.User;
@@ -41,6 +42,10 @@ public class FXML_Add_OrderController implements Initializable {
     private Button bttn_remove_item;
     @FXML
     private Label lbl_table_num;
+    @FXML
+    private Label lbl_error_msg;
+    @FXML
+    private Button btn_finish_order;
     
     User owner;
     int table_number;
@@ -86,15 +91,26 @@ public class FXML_Add_OrderController implements Initializable {
         observable_contents.remove(combobox_menuItems.getValue());
     }
     
+    @FXML
     public void finish_order(ActionEvent e){
+        //An order must contain at least 1 item
+        lbl_error_msg.setText("");
         if(observable_contents.size() == 0){
-            System.err.println("Empty orders not allowed");
+            lbl_error_msg.setText("Empty orders not allowed");
             return;
         }
+        
+        //Passes comment text to order
         this_order.setComment(txtarea_comments.getText());
         
+        //sets main widow order to this order
+        if(table_number == 1){ FXML_main_viewController.table_1_order = this_order;}
+        if(table_number == 2){ FXML_main_viewController.table_2_order = this_order;}
+        if(table_number == 3){ FXML_main_viewController.table_3_order = this_order;}
         
-        FXML_main_viewController.table_1_order = this_order;
+        //Closes window
+        Stage stage = (Stage) btn_finish_order.getScene().getWindow();
+        stage.close();
     }
 
     

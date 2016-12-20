@@ -11,7 +11,7 @@
    <children>
       <ListView fx:id="lstview_order_contents" layoutX="364.0" layoutY="21.0" prefHeight="343.0" prefWidth="200.0" />
       <ComboBox fx:id="combobox_menuItems" layoutX="25.0" layoutY="47.0" prefWidth="150.0" />
-      <Button layoutX="25.0" layoutY="352.0" mnemonicParsing="false" text="Add Order" />
+      <Button fx:id="btn_finish_order" layoutX="25.0" layoutY="352.0" mnemonicParsing="false" onAction="#finish_order" text="Finish Order" />
       <Button fx:id="bttn_add_item" layoutX="216.0" layoutY="47.0" mnemonicParsing="false" onAction="#addItem" text="Add" />
       <TextArea fx:id="txtarea_comments" layoutX="25.0" layoutY="131.0" prefHeight="69.0" prefWidth="150.0" />
       <Label layoutX="25.0" layoutY="21.0" text="Items" />
@@ -19,5 +19,6 @@
       <Button fx:id="bttn_remove_item" layoutX="281.0" layoutY="47.0" mnemonicParsing="false" onAction="#deleteItem" text="Remove" />
       <Label layoutX="25.0" layoutY="220.0" text="Table" />
       <Label fx:id="lbl_table_num" layoutX="86.0" layoutY="220.0" />
+      <Label fx:id="lbl_error_msg" layoutX="26.0" layoutY="307.0" prefHeight="17.0" prefWidth="309.0" textFill="RED" />
    </children>
 </AnchorPane>
