@@ -57,9 +57,9 @@ public class FXML_main_viewController implements Initializable {
     
     private User user;
     private int selected_table = 0; //0 = no table selected
-    protected Order table_1_order = null;
-    protected Order table_2_order = null;
-    protected Order table_3_order = null;
+    protected static Order table_1_order = null;
+    protected static Order table_2_order = null;
+    protected static Order table_3_order = null;
     private ArrayList<Order> old_orders = new ArrayList();
 
     

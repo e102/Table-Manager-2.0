@@ -44,6 +44,7 @@ public class FXML_Add_OrderController implements Initializable {
     
     User owner;
     int table_number;
+    Order this_order = new Order();
     
     Menu_Item water = new Menu_Item("Water", 2);
     Menu_Item coffee = new Menu_Item("Coffee", 3);
@@ -52,8 +53,6 @@ public class FXML_Add_OrderController implements Initializable {
     Menu_Item cheesecake = new Menu_Item("Cheesecake", 5);
     
     ArrayList menu = new ArrayList();
-    
-    Order this_order = new Order();
 
     ObservableList<Menu_Item> observable_contents;
     private ArrayList<Menu_Item> contents = new ArrayList();
@@ -86,6 +85,18 @@ public class FXML_Add_OrderController implements Initializable {
     public void deleteItem(ActionEvent e){
         observable_contents.remove(combobox_menuItems.getValue());
     }
+    
+    public void finish_order(ActionEvent e){
+        if(observable_contents.size() == 0){
+            System.err.println("Empty orders not allowed");
+            return;
+        }
+        this_order.setComment(txtarea_comments.getText());
+        
+        
+        FXML_main_viewController.table_1_order = this_order;
+    }
+
     
     public void set_owner(User owner){
         this.owner = owner;

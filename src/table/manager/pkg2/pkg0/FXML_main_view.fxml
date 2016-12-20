@@ -25,7 +25,7 @@
                   <Button fx:id="btn_cancel_order" layoutX="166.0" layoutY="703.0" mnemonicParsing="false" onAction="#cancel_order" text="Cancel Order" />
                   <Label fx:id="welcome_user_lbl" layoutX="14.0" layoutY="23.0" prefHeight="17.0" prefWidth="263.0" text="User" />
                   <Button fx:id="btn_add_order1" layoutX="165.0" layoutY="81.0" mnemonicParsing="false" text="Modify Order" />
-                  <Label fx:id="Order_Erro_Label" layoutX="19.0" layoutY="112.0" prefHeight="17.0" prefWidth="40.0" textFill="RED" />
+                  <Label fx:id="Order_Erro_Label" layoutX="19.0" layoutY="112.0" prefHeight="17.0" prefWidth="265.0" textFill="RED" />
                   <Label layoutX="25.0" layoutY="142.0" text="Current Order:" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
