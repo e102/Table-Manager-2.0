@@ -71,6 +71,10 @@ public class Order {
         this.table = table;
     }
     
+    public int getTable(){
+        return table;
+    }
+    
     public void setComment(String comment){
         this.comment = comment;
     }

@@ -143,16 +143,49 @@ public class FXML_main_viewController implements Initializable {
         if(selected_table == 3){table_3_order = new Order(user,selected_table);}
         
         //Open order modifier page
-        Stage modify_order = new Stage();
-        modify_order.setAlwaysOnTop(true);
-        modify_order.setTitle("Order Creator");
+        Stage add_order = new Stage();
+        add_order.setAlwaysOnTop(true);
+        add_order.setTitle("Order Creator");
         FXMLLoader order_chooser_loader = new FXMLLoader(getClass().getResource("FXML_Add_Order.fxml"));
         try{
         Scene scene = new Scene(order_chooser_loader.load());
         FXML_Add_OrderController ctrl = order_chooser_loader.getController();
-        modify_order.setScene(scene);
+        add_order.setScene(scene);
         ctrl.set_owner(user);
         ctrl.set_table(selected_table);
+        ctrl.initialize_order();
+        add_order.show();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void modify_order(ActionEvent a){
+        
+        // check if a table is selected
+        if(selected_table == 0){
+            Order_Erro_Label.setText("Please select a table");
+            return;
+        }
+        
+        //check if an order exists
+        if(table_to_order(selected_table) == null){
+            Order_Erro_Label.setText("No open order exists for this table.");
+            return;
+        }
+        
+        //Open order modifier page
+        Stage modify_order = new Stage();
+        modify_order.setAlwaysOnTop(true);
+        modify_order.setTitle("Order Modifier");
+        FXMLLoader order_chooser_loader = new FXMLLoader(getClass().getResource("FXML_Modify_Order.fxml"));
+        try{
+        Scene scene = new Scene(order_chooser_loader.load());
+        FXML_Modify_OrderController ctrl = order_chooser_loader.getController();
+        modify_order.setScene(scene);
+        ctrl.set_order(table_to_order(selected_table));
         ctrl.initialize_order();
         modify_order.show();
         }
