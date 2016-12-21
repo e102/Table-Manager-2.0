@@ -26,10 +26,10 @@ public class Menu_Item {
     }
     
     public String getName(){
-        return this.name;
+        return name;
     }
     
     public float getCost(){
-    return this.cost;
+    return cost;
     }
 }

@@ -222,8 +222,7 @@ public class FXML_main_viewController implements Initializable {
         }
         observable_order_contents = FXCollections.observableList(table_to_order(selected_table).get_contents());
         list_orders.setItems(observable_order_contents);
-        lbl_total.setText(Float.toString(table_to_order(selected_table).getPrice()));   //Problem
-        System.out.println((Float.toString(table_to_order(selected_table).getPrice())));
+        lbl_total.setText(Float.toString(table_to_order(selected_table).getPrice()));
     }
     
     

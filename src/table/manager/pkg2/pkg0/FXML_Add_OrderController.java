@@ -7,6 +7,7 @@ package table.manager.pkg2.pkg0;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,7 +58,7 @@ public class FXML_Add_OrderController implements Initializable {
     Menu_Item pizza = new Menu_Item("Pizza", 12);
     Menu_Item cheesecake = new Menu_Item("Cheesecake", 5);
     
-    ArrayList menu = new ArrayList();
+    List<Menu_Item> menu = new ArrayList<Menu_Item>();
 
     ObservableList<Menu_Item> observable_contents;
     private ArrayList<Menu_Item> contents = new ArrayList();
@@ -72,7 +73,7 @@ public class FXML_Add_OrderController implements Initializable {
         menu.add(pasta);
         menu.add(pizza);
         menu.add(cheesecake);
-        ObservableList<Menu_Item> observable_menu = FXCollections.observableArrayList(menu);
+        ObservableList<Menu_Item> observable_menu = FXCollections.observableList(menu);
         combobox_menuItems.setItems(observable_menu);
         combobox_menuItems.getSelectionModel().selectFirst();
         
