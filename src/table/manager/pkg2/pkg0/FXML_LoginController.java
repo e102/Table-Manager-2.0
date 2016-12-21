@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * The login controller takes info entered in the login page and determines if a login is valid.
+ * @author Srdjan Miletic
  */
 package table.manager.pkg2.pkg0;
 
@@ -49,29 +48,38 @@ public class FXML_LoginController implements Initializable {
     private String password;
     private Stage stage;
     
+    /**
+     * @param event 
+     * 
+     * On button press, checks contents of username and password boxes. If valid, opens main window.
+     */
     @FXML
     private void handleButtonAction(ActionEvent event) {
+        
+        //fetch contents of boxes
         userName = username_textbox.getText();
         password = password_passwordbox.getText();
         
-        if(userData.get(userName) != null){
-            if(userData.get(userName).getPassword().equals(password)){
-                Login_Msg_lbl.setTextFill(Color.web("#009933"));
-                Login_Msg_lbl.setText("Login details Correct");
-                try{
-                    this.login();
-                }
-                catch(Exception e){
-                    System.err.println(e.getMessage());
-                    System.out.println("Oops");
-                }
+        //Check if user exists
+        if(userData.get(userName) == null){
+            Login_Msg_lbl.setText("Username not recognized.");
+            return;
+        }
+        
+        //Check if password is correct
+        if(userData.get(userName).getPassword().equals(password)){
+            Login_Msg_lbl.setTextFill(Color.web("#009933"));
+            Login_Msg_lbl.setText("Login details Correct");
+            try{
+                this.login();
             }
-            else{
-                Login_Msg_lbl.setText("Incorrect password");
+            catch(Exception e){
+                System.err.println(e.getMessage());
+                System.out.println("Oops");
             }
         }
         else{
-            Login_Msg_lbl.setText("Username not recognized.");
+            Login_Msg_lbl.setText("Incorrect password");
         }
     }
     
@@ -89,10 +97,18 @@ public class FXML_LoginController implements Initializable {
         // TODO
     }
     
+    /**
+     * Sets userdata to input
+     * @param userData 
+     */
     public void setUserInfo(HashMap <String,User> userData){
         this.userData = userData;
     }
     
+    /**
+     * sets stage to input stage
+     * @param stage 
+     */
     public void setStage(Stage stage){
         this.stage = stage;
     }

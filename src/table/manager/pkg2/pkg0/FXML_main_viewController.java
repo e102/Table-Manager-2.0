@@ -27,8 +27,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * FXML Controller class for main view
  *
+ * handles table clicks, opening/closing/deleting/changing orders.
+ * 
  * @author Srdjan
  */
 public class FXML_main_viewController implements Initializable {
@@ -73,7 +75,8 @@ public class FXML_main_viewController implements Initializable {
     ObservableList<Menu_Item> observable_empty = FXCollections.emptyObservableList();
     
     /**
-     * Initializes the controller class.
+     * Initializes the controller class
+     * adds eventListeners to table images.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -103,11 +106,11 @@ public class FXML_main_viewController implements Initializable {
         });
     }  
     
-    public void setUser(User user){
-        this.user = user;
-        welcome_user_lbl.setText("Current User: " + user.getName());
-    }
-    
+
+    /**
+     * takes the table number and updates labels, currentorder and the listview
+     * @param table_number 
+     */
     private void table_pressed(int table_number){
         
         //Set selected table variable and label  
@@ -127,7 +130,10 @@ public class FXML_main_viewController implements Initializable {
         }
     }
     
-    //Opens the order adder window. The user can then create a new order.
+    /**
+     * If no order exists for current table, opens the order adder window.
+     * User can then create a new order.
+     */
     @FXML
     private void add_order(ActionEvent a){
         
@@ -167,6 +173,10 @@ public class FXML_main_viewController implements Initializable {
         }
     }
     
+    /**
+     * Opens the order modifier window to change an existing order
+     * @param a 
+     */
     @FXML
     private void modify_order(ActionEvent a){
         
@@ -200,6 +210,10 @@ public class FXML_main_viewController implements Initializable {
         }
     }
     
+    /**
+     * Deletes the currently selected order
+     * @param a 
+     */
     @FXML
     private void cancel_order(ActionEvent a){
         
@@ -215,20 +229,43 @@ public class FXML_main_viewController implements Initializable {
             return;
         }
         
-        // table selected = delete current order
-        if(selected_table == 1){
-            table_1_order = null;
+        //add to old orders
+        old_orders.add(table_to_order(selected_table));
+        
+        //open warning window
+        Stage warning = new Stage();
+        warning.setAlwaysOnTop(true);
+        warning.setTitle("Warning");
+        FXMLLoader warning_loader = new FXMLLoader(getClass().getResource("FXML_Warning_Delete_Order.fxml"));
+        try{
+        Scene scene = new Scene(warning_loader.load());
+        FXML_Warning_Delete_OrderController ctrl = warning_loader.getController();
+        warning.setScene(scene);
+        ctrl.getTable(selected_table);
+        warning.show();
         }
-        if(selected_table == 2){
-            table_2_order = null;
-        }       
-        if(selected_table == 3){
-            table_3_order = null;
+        catch(Exception e){
+            e.printStackTrace();
         }
+        
+//        // table selected = delete current order
+//        if(selected_table == 1){
+//            table_1_order = null;
+//        }
+//        if(selected_table == 2){
+//            table_2_order = null;
+//        }       
+//        if(selected_table == 3){
+//            table_3_order = null;
+//        }
         
         refresh_list();
     }
     
+    /**
+     * Archives the current order
+     * @param a 
+     */
     @FXML 
     private void close_order(ActionEvent a){
         // no table selecte = try again
@@ -236,13 +273,14 @@ public class FXML_main_viewController implements Initializable {
             return;
         }
         
+        // no order = can't delete
         if(table_to_order(selected_table) == null){
             lbl_total.setText("N/A");
             list_orders.setItems(null);
             return;
         }
         
-        // table selected = delete current order
+        // fetch and delete current order
         if(selected_table == 1){
             old_orders.add(table_1_order);
             table_1_order = null;
@@ -256,9 +294,14 @@ public class FXML_main_viewController implements Initializable {
             table_3_order = null;
         }
         
+        //refresh the listview
         refresh_list();
     }
     
+    /**
+     * refreshes the listview
+     * @param z 
+     */
     @FXML
     private void refresh_list(ActionEvent z){
         // no table selected = error
@@ -277,7 +320,9 @@ public class FXML_main_viewController implements Initializable {
         lbl_total.setText(Float.toString(table_to_order(selected_table).getPrice()));
     }
     
-    // as above, but for use by other methods (no actionevent parameter)
+    /**
+     * refreshes the listview (no paramaters)
+     */
     private void refresh_list(){
         if(selected_table == 0){return;}
         if(table_to_order(selected_table) == null){
@@ -290,17 +335,27 @@ public class FXML_main_viewController implements Initializable {
         lbl_total.setText(Float.toString(table_to_order(selected_table).getPrice()));
     }
     
+    /**
+     * Sets the user currently logged in. Used by the login controler
+     * @param user 
+     */
+    public void setUser(User user){
+        this.user = user;
+        welcome_user_lbl.setText("Current User: " + user.getName());
+    }
     
-    
-    //Misc method which returns order of a table when given table number.
-    public static Order table_to_order(int i){
-        if(i == 1){
+    /**Misc method which returns current order when given table number.
+     * @param table_number
+     * @return corresponding table order
+     */
+    public static Order table_to_order(int table_number){
+        if(table_number == 1){
             return table_1_order;
         }
-        if(i == 2){
+        if(table_number == 2){
             return table_2_order;
         }       
-        if(i == 3){
+        if(table_number == 3){
             return table_3_order;
         }
         return null;
