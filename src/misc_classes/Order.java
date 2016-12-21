@@ -28,7 +28,7 @@ public class Order {
     
     @Override
     public String toString(){
-        return owner.getName();
+        return(table + " " + owner.getName());
     }
     
     public void addItem(Menu_Item item){
@@ -44,11 +44,12 @@ public class Order {
     private void findTotalPrice(){
         totalPrice = 0;
         for (int i = 0; i < contents.size(); i++) {
+            System.out.println(contents.get(i).getCost());
             totalPrice += contents.get(i).getCost();
         }
     }
     
-    private float getPrice(){
+    public float getPrice(){
         return this.totalPrice;
     }
     

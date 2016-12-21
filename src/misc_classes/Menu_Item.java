@@ -22,7 +22,7 @@ public class Menu_Item {
     
     @Override
     public String toString(){
-        return this.name;
+        return(name + " £" + cost);
     }
     
     public String getName(){

@@ -215,9 +215,15 @@ public class FXML_main_viewController implements Initializable {
     @FXML   //WIP
     private void refresh_list(ActionEvent z){
         if(selected_table == 0){return;}
-        if(table_to_order(selected_table) == null){return;}
+        if(table_to_order(selected_table) == null){
+            lbl_total.setText("N/A");
+            list_orders.setItems(null);
+            return;
+        }
         observable_order_contents = FXCollections.observableList(table_to_order(selected_table).get_contents());
         list_orders.setItems(observable_order_contents);
+        lbl_total.setText(Float.toString(table_to_order(selected_table).getPrice()));   //Problem
+        System.out.println((Float.toString(table_to_order(selected_table).getPrice())));
     }
     
     
