@@ -88,21 +88,13 @@ public class FXML_Add_OrderController implements Initializable {
     @FXML
     public void addItem(ActionEvent e){
         observable_contents.add(combobox_menuItems.getValue());
-        lbl_total.setText("Total = " + Float.toString(findtotal()));
+        lbl_total.setText("Total = " + Float.toString(this_order.getPrice()));
     }
     
     @FXML
     public void deleteItem(ActionEvent e){
         observable_contents.remove(combobox_menuItems.getValue());
-        lbl_total.setText("Total = " + Float.toString(findtotal()));
-    }
-    
-    private float findtotal(){
-        float total = 0;
-        for (int i = 0; i < observable_contents.size(); i++) {
-            total += observable_contents.get(i).getCost();
-        }
-        return total;
+        lbl_total.setText("Total = " + Float.toString(this_order.getPrice()));
     }
     
     @FXML

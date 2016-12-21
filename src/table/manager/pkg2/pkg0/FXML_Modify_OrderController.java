@@ -82,21 +82,13 @@ public class FXML_Modify_OrderController implements Initializable {
     @FXML
     public void addItem(ActionEvent e){
         observable_contents.add(combobox_menuItems.getValue());
-        lbl_total.setText("Total = " + Float.toString(findtotal()));
+        lbl_total.setText("Total = " + Float.toString(this_order.getPrice()));
     }
     
     @FXML
     public void deleteItem(ActionEvent e){
         observable_contents.remove(combobox_menuItems.getValue());
-        lbl_total.setText("Total = " + Float.toString(findtotal()));
-    }
-    
-    private float findtotal(){
-        float total = 0;
-        for (int i = 0; i < observable_contents.size(); i++) {
-            total += observable_contents.get(i).getCost();
-        }
-        return total;
+        lbl_total.setText("Total = " + Float.toString(this_order.getPrice()));
     }
     
     @FXML
@@ -104,7 +96,7 @@ public class FXML_Modify_OrderController implements Initializable {
         //An order must contain at least 1 item
         lbl_error_msg.setText("");
         if(observable_contents.size() == 0){
-            lbl_error_msg.setText("Empty orders not allowed");
+            lbl_error_msg.setText("Empty orders are not allowed");
             return;
         }
         
