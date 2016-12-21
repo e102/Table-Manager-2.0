@@ -32,4 +32,21 @@ public class Menu_Item {
     public float getCost(){
     return cost;
     }
+    
+    @Override
+    public boolean equals(Object obj){
+        
+        //object must exist and be a menu_item
+        if(obj == null){return false;}
+        if(!(obj instanceof Menu_Item)){return false;}
+        
+        //if literally same object, true
+        if(obj == this){return true;}
+        
+        Menu_Item other = (Menu_Item) obj;
+        
+        //if same name and cost, are equivilent
+        if(other.getName() == name && other.getCost() == cost){return true;}
+        return false;
+    }
 }

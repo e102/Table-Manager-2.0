@@ -109,15 +109,21 @@ public class FXML_main_viewController implements Initializable {
     }
     
     private void table_pressed(int table_number){
+        
+        //Set selected table variable and label  
         selected_table = table_number;
         lbl_selected_table.setText(Integer.toString(table_number));
+        
+        //Set list and total to empty if there is no order. Else set to display order contents
         if(table_to_order(table_number) != null){
             observable_order_contents = FXCollections.observableList(table_to_order(table_number).get_contents());
             list_orders.setItems(observable_order_contents);
+            lbl_total.setText(Float.toString(table_to_order(selected_table).getPrice()));
         }
         else{
             observable_order_contents = null;
             list_orders.setItems(observable_empty);
+            lbl_total.setText("N/A");
         }
     }
     

@@ -121,6 +121,5 @@ public class FXML_Modify_OrderController implements Initializable {
         observable_contents = FXCollections.observableList(this_order.get_contents());
         lstview_order_contents.setItems(observable_contents);
         lbl_table_num.setText(Integer.toString(this_order.getTable()));
-        lbl_table_num.setText(Integer.toString(this_order.getTable()));
     }
 }
