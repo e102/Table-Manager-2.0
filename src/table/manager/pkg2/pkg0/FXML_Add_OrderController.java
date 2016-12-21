@@ -47,6 +47,8 @@ public class FXML_Add_OrderController implements Initializable {
     private Label lbl_error_msg;
     @FXML
     private Button btn_finish_order;
+    @FXML
+    private Label lbl_total;
     
     User owner;
     int table_number;
@@ -81,15 +83,26 @@ public class FXML_Add_OrderController implements Initializable {
         lbl_table_num.setText(Integer.toString(table_number));
 
     }
+
     
     @FXML
     public void addItem(ActionEvent e){
         observable_contents.add(combobox_menuItems.getValue());
+        lbl_total.setText("Total = " + Float.toString(findtotal()));
     }
     
     @FXML
     public void deleteItem(ActionEvent e){
         observable_contents.remove(combobox_menuItems.getValue());
+        lbl_total.setText("Total = " + Float.toString(findtotal()));
+    }
+    
+    private float findtotal(){
+        float total = 0;
+        for (int i = 0; i < observable_contents.size(); i++) {
+            total += observable_contents.get(i).getCost();
+        }
+        return total;
     }
     
     @FXML

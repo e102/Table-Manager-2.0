@@ -187,7 +187,7 @@ public class FXML_main_viewController implements Initializable {
             table_3_order = null;
         }
         
-        System.out.println("Order deleted!");
+        refresh_list();
     }
     
     @FXML 
@@ -197,7 +197,13 @@ public class FXML_main_viewController implements Initializable {
             return;
         }
         
-        // table selected = delete current order        
+        if(table_to_order(selected_table) == null){
+            lbl_total.setText("N/A");
+            list_orders.setItems(null);
+            return;
+        }
+        
+        // table selected = delete current order
         if(selected_table == 1){
             old_orders.add(table_1_order);
             table_1_order = null;
@@ -210,10 +216,30 @@ public class FXML_main_viewController implements Initializable {
             old_orders.add(table_3_order);
             table_3_order = null;
         }
+        
+        refresh_list();
     }
     
-    @FXML   //WIP
+    @FXML
     private void refresh_list(ActionEvent z){
+        // no table selected = error
+        if(selected_table == 0){return;}
+        
+        // no order = list and total should be empty
+        if(table_to_order(selected_table) == null){
+            lbl_total.setText("N/A");
+            list_orders.setItems(null);
+            return;
+        }
+        
+        // otherwise, set list to order contents and label to total
+        observable_order_contents = FXCollections.observableList(table_to_order(selected_table).get_contents());
+        list_orders.setItems(observable_order_contents);
+        lbl_total.setText(Float.toString(table_to_order(selected_table).getPrice()));
+    }
+    
+    // as above, but for use by other methods (no actionevent parameter)
+    private void refresh_list(){
         if(selected_table == 0){return;}
         if(table_to_order(selected_table) == null){
             lbl_total.setText("N/A");

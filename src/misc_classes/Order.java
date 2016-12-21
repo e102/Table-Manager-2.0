@@ -47,7 +47,7 @@ public class Order {
     }
     
     public float getPrice(){
-//        findTotalPrice();
+        findTotalPrice();
         return this.totalPrice;
     }
     
