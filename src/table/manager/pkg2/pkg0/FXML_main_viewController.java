@@ -62,8 +62,8 @@ public class FXML_main_viewController implements Initializable {
     @FXML
     private Button btn_refresh;
     
-    private User user;
-    private int selected_table = 0; //0 = no table selected
+    protected static User user;
+    protected static int selected_table = 0; //0 = no table selected
     protected static Order table_1_order = null;
     protected static Order table_2_order = null;
     protected static Order table_3_order = null;
@@ -75,8 +75,8 @@ public class FXML_main_viewController implements Initializable {
     ObservableList<Menu_Item> observable_empty = FXCollections.emptyObservableList();
     
     /**
-     * Initializes the controller class
-     * adds eventListeners to table images.
+     * <p>Adds eventListeners to table images.</p>
+     * 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -163,7 +163,6 @@ public class FXML_main_viewController implements Initializable {
         Scene scene = new Scene(order_chooser_loader.load());
         FXML_Add_OrderController ctrl = order_chooser_loader.getController();
         add_order.setScene(scene);
-        ctrl.set_owner(user);
         ctrl.set_table(selected_table);
         ctrl.initialize_order();
         add_order.show();

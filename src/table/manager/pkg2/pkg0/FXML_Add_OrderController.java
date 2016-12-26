@@ -9,7 +9,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,7 +50,6 @@ public class FXML_Add_OrderController implements Initializable {
     @FXML
     private Label lbl_total;
     
-    User owner;
     int table_number;
     Order this_order = new Order();
     
@@ -85,19 +83,30 @@ public class FXML_Add_OrderController implements Initializable {
 
     }
 
-    
+    /**
+     * Adds the item selected in the combobox to the observable contents list.
+     * @param e 
+     */
     @FXML
     public void addItem(ActionEvent e){
         observable_contents.add(combobox_menuItems.getValue());
         lbl_total.setText("Total = " + Float.toString(this_order.getPrice()));
     }
     
+    /**
+     * Deletes the selected item in the combobox from the order.
+     * @param e 
+     */
     @FXML
     public void deleteItem(ActionEvent e){
         observable_contents.remove(combobox_menuItems.getValue());
         lbl_total.setText("Total = " + Float.toString(this_order.getPrice()));
     }
     
+    /**
+     * Cheks if the order is valid. If yes, passes the order back to the main controller and closes the current window.
+     * @param e 
+     */
     @FXML
     public void finish_order(ActionEvent e){
         //An order must contain at least 1 item
@@ -120,10 +129,10 @@ public class FXML_Add_OrderController implements Initializable {
         stage.close();
     }
 
-    
-    public void set_owner(User owner){
-        this.owner = owner;
-    }
+    /**
+     * passes in a table number
+     * @param table_number 
+     */
     public void set_table(int table_number){
         this.table_number = table_number;
         
@@ -131,8 +140,10 @@ public class FXML_Add_OrderController implements Initializable {
         lbl_table_num.setText(Integer.toString(table_number));
     }
     
+    /**
+     * Initializes observable list, listview and labels
+     */
     public void initialize_order(){
-        this_order.setOwner(owner);
         this_order.setTable(table_number);
         observable_contents = FXCollections.observableList(this_order.get_contents());
         lstview_order_contents.setItems(observable_contents);

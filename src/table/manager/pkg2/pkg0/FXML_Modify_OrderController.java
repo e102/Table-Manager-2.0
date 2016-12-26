@@ -79,18 +79,29 @@ public class FXML_Modify_OrderController implements Initializable {
     }
 
     
+    /**
+     * Adds selected item to order
+     * @param e 
+     */
     @FXML
     public void addItem(ActionEvent e){
         observable_contents.add(combobox_menuItems.getValue());
         lbl_total.setText("Total = " + Float.toString(this_order.getPrice()));
     }
-    
+    /**
+     * Deletes selected item from order
+     * @param e 
+     */
     @FXML
     public void deleteItem(ActionEvent e){
         observable_contents.remove(combobox_menuItems.getValue());
         lbl_total.setText("Total = " + Float.toString(this_order.getPrice()));
     }
     
+    /**
+     * Checks if order is valid. If yes, passes to main controller and closes window.
+     * @param e 
+     */
     @FXML
     public void finish_order(ActionEvent e){
         //An order must contain at least 1 item
@@ -113,10 +124,17 @@ public class FXML_Modify_OrderController implements Initializable {
         stage.close();
     }
     
+    /**
+     * passes in pointer to main order
+     * @param order 
+     */
     public void set_order(Order order){
         this_order = order;
     }
     
+    /**
+     * Initializes observable list, listview and table number label
+     */
     public void initialize_order(){
         observable_contents = FXCollections.observableList(this_order.get_contents());
         lstview_order_contents.setItems(observable_contents);

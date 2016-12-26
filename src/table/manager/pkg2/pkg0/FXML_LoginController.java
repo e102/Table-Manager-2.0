@@ -21,7 +21,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- *
+ *Controller for the login page
+ * 
  * @author Srdjan
  */
 public class FXML_LoginController implements Initializable {
@@ -83,6 +84,10 @@ public class FXML_LoginController implements Initializable {
         }
     }
     
+    /**
+     * closes login window and opens main view, passing user details in.
+     * @throws Exception 
+     */
     private void login() throws Exception{
         stage.setTitle("Table Manager 2.0 Main");
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("FXML_main_view.fxml"));
@@ -94,7 +99,6 @@ public class FXML_LoginController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
     
     /**
@@ -106,7 +110,7 @@ public class FXML_LoginController implements Initializable {
     }
     
     /**
-     * sets stage to input stage
+     * passing in stage from starting controller
      * @param stage 
      */
     public void setStage(Stage stage){
